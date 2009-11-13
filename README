@@ -1,2 +1,54 @@
-A new plugin
+= General =
 
+A rails plugin for making easier to use text fields for dates with I18n 
+localization support. With a little of tweaking this plugin works with most of
+the javascript date pickers. You can use this also with formtastic.
+  
+
+
+= Installation = 
+
+./script/plugin install git://github.com/timoi/localized_text_dates.git
+
+
+
+= Usage =
+
+Declare the date fields in your model like this:
+
+# creates localized attributes for your date fields
+localized_text_dates :your_date_field, :your_date_field2 
+
+# adds validations for correct format
+validates_localized_text_dates :your_date_field, :your_date_field2
+
+
+In your views:
+
+# you can use the normal text_fields instead of date_select
+<%= f.text_field :your_date_field_l %>
+<%= f.text_field :your_date_field2_l %>
+
+
+
+= Configuration =
+
+In the language file:
+
+# the date format is determined by I18n.t(:'date.formats.short')
+[locale]
+	date:
+    formats:
+      short: "%e.%m.%Y"
+
+
+# the error message is determined by I18n.t(:'activerecord.errors.messages.localized_date_format')
+[locale]
+	activerecord:
+	    errors:
+	      ...
+	      messages:
+	        ...
+	        localized_date_format: 'should be given in format dd.mm.yyyy'
+	
+	
